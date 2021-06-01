@@ -30,15 +30,30 @@ func main() {
 	// for _, i := range [5]int{1, 2, 3, 4, 5} {
 	// 	fmt.Print(i)
 	// }
-	// wg := sync.WaitGroup{}
-	// wg.Add(5)
-	// for _, i := range [5]int{1, 2, 3, 4, 5} {
-	// 	go func() {
-	// 		fmt.Println(i)
-	// 		wg.Done()
-	// 	}()
+	wg := sync.WaitGroup{}
+	// ch := make(chan int)
+	// defer close(ch)
+	wg.Add(5)
+	for _, i := range [5]int{1, 2, 3, 4, 5} {
+		go func() {
+			fmt.Println(i)
+			wg.Done()
+		}()
+		// go func(i int) {
+		// 	ch <- i
+		// 	// wg.Done()
+		// }(i)
+	}
+	// select {
+	// case x := <-ch:
+	// 	fmt.Printf("recvdq %d", x)
+	// default:
+	// 	fmt.Println("nothing to do")
 	// }
-	// wg.Wait()
+	// for {
+	// 	fmt.Println(<-ch)
+	// }
+	wg.Wait()
 	// wg.Add(5)
 	// fmt.Println("")
 	// for _, i := range [5]int{1, 2, 3, 4, 5} {
