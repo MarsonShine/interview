@@ -2,13 +2,38 @@ package main
 
 import (
 	"fmt"
+	src "interview/src"
 	"reflect"
 	"sync"
 	"time"
 	"unsafe"
 )
 
+func firstMissingPositive(nums []int) int {
+	n := len(nums)
+	for i := 0; i < n; i++ {
+		for nums[i] > 0 && nums[i] <= n && nums[i] != nums[nums[i]-1] {
+			nums[nums[i]-1], nums[i] = nums[i], nums[nums[i]-1]
+		}
+	}
+	for i := 0; i < n; i++ {
+		if nums[i] != i+1 {
+			return i + 1
+		}
+	}
+	return n + 1
+}
+func abs(n int) int {
+	if n < 0 {
+		return -n
+	}
+	return n
+}
 func main() {
+	// fmt.Println(firstMissingPositive([]int{3, 4, -1, 1}))
+	// fmt.Println(src.HasCycle(src.CreateListNode()))
+	// fmt.Println(src.MergeTowList(&src.ListNode{Val: 1, Next: &src.ListNode{Val: 4, Next: &src.ListNode{Val: 5, Next: nil}}}, &src.ListNode{Val: 1, Next: &src.ListNode{Val: 3, Next: &src.ListNode{Val: 4}}}))
+	fmt.Println(src.FirstMissingPositive([]int{3, 4, -1, 1}))
 	// m := map[string]iv.Student{"people": {"marsonshine"}}
 	// // m1 := map[string]iv.Student{"people": {"marsonshine"}}
 	// // m["people"].Name = "marsonshine"
